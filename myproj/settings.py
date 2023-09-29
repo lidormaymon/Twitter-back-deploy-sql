@@ -33,7 +33,11 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "littermanaagement@gmail.com"
 EMAIL_HOST_PASSWORD = "xzbp lvla fjoy yyss"
 
-CORS_ORIGIN_ALLOW_ALL = True  # Allow requests from any origin
+
+ALLOWED_HOSTS = ["twitter-clone-backend-sqlite.onrender.com", "https://twitter-clone-project-1.netlify.app"]
+CORS_ORIGIN_ALLOW_ALL = True
+
+
 
 
 # Application definition
