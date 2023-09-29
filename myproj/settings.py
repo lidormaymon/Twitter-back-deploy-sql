@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [
 ]
 
 
-CORS_ORIGIN_ALLOW_ALL = True  # Allow requests from any origin
+
 
 
 # Application definition
