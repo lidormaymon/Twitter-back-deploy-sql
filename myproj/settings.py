@@ -33,10 +33,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "littermanaagement@gmail.com"
 EMAIL_HOST_PASSWORD = "xzbp lvla fjoy yyss"
 
-ALLOWED_HOSTS = [
-    "twitter-clone-backend-sqlite.onrender.com"
-]
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 
