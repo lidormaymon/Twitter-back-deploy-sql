@@ -25,6 +25,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['email'] = user.email
         token['image'] = str(user.profile_image.url) if user.profile_image else None
         token['date_joined'] = str(user.date_joined)
+        token['email_verified'] = user.email_verified
         token['display_name'] = str(user.display_name)
         token['bio'] = str(user.bio)
         return token
@@ -39,7 +40,10 @@ def register(request):
     if not existUser:
         if serializer.is_valid():
             email_subject = "Registration Successful"
-            email_message = f"Thank you for registering to our website {request.data['username']}."
+            email_message = f"""
+                Thank you for registering to our website {request.data['username']}.
+                Please visit this link in order to activate your account http://localhost:5173/verify-account
+                """
             from_email = settings.DEFAULT_FROM_EMAIL  # Use your desired sender email
             try:
                 send_mail(email_subject, email_message, from_email, [request.data['email']])

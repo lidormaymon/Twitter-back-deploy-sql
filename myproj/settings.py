@@ -34,7 +34,7 @@ EMAIL_HOST_USER = "littermanaagement@gmail.com"
 EMAIL_HOST_PASSWORD = "xzbp lvla fjoy yyss"
 
 
-ALLOWED_HOSTS = ["twitter-clone-backend-sqlite.onrender.com", "https://twitter-clone-project-1.netlify.app"]
+ALLOWED_HOSTS = ["twitter-clone-backend-sqlite.onrender.com", "https://twitter-clone-project-1.netlify.app" , "localhost:5173", "127.0.0.1"]
 CORS_ORIGIN_ALLOW_ALL = True
 
 

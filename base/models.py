@@ -8,6 +8,7 @@ class CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
     display_name = models.CharField(max_length=20, null=False, blank=False)
     profile_image = models.ImageField(null=True, blank=True, default='defaultProfile.jpg', upload_to='profiles/')
+    email_verified = models.BooleanField(default=False) # A boolean that deceides if user has verified through email or not
     bio = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
