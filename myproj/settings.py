@@ -34,13 +34,12 @@ EMAIL_HOST_USER = "littermanaagement@gmail.com"
 EMAIL_HOST_PASSWORD = "xzbp lvla fjoy yyss"
 
 
-ALLOWED_HOSTS = ["twitter-clone-backend-sqlite.onrender.com", "https://twitter-clone-project-1.netlify.app" , "localhost:5173", "127.0.0.1"]
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-
-
 # Application definition
+
+SITE_ID = 1
 
 INSTALLED_APPS = [
     "channels",
@@ -62,7 +61,16 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 
-SITE_ID = 1
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS":{"access_type":"online"}
+    }
+}
+
 
 AUTH_USER_MODEL = 'base.CustomUser'
 
@@ -75,6 +83,8 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+
 
 
 REST_FRAMEWORK = {
@@ -205,8 +215,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_PROFILE_IMAGE = 'static/defaultProfile.jpg'
 
-AUTHENTICATION_BACKENDS = [
+AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
-]
+)
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

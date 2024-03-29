@@ -166,12 +166,18 @@ def who_liked_tweet(request):
             likes = TweetLike.objects.filter(tweet_id=tweet_id)
             likes_serializer = TweetLikeSerializer(likes, many=True)
             likes_user_id = [like for like in likes_serializer.data]
+            likes_amount = 0
+            for like in likes:
+                likes_amount += 1
 
             return Response({
-                'likes':likes_user_id
+                'likes':likes_user_id,
+                'likes_amount':likes_amount
             })
     else:
         return Response({'Error':'tweet_is is required.'}, status=400)
+
+
 
 
 class TweetLikeAPIView(APIView):
