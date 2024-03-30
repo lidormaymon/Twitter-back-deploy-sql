@@ -23,10 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-br=u*@5(va($im#s*+s$+n+g*4)%pw@dm#s+t5wk@96wy!eip9'
 
-ALLOWED_HOSTS = [
-    "twitter-clone-backend-sqlite.onrender.com",
-    "127.0.0.1"
-    ]
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,10 +35,14 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "littermanaagement@gmail.com"
 EMAIL_HOST_PASSWORD = "xzbp lvla fjoy yyss"
 
+ALLOWED_HOSTS = [
+    "twitter-clone-backend-sqlite.onrender.com",
+    "127.0.0.1"
+]
 
 CORS_ALLOWED_ORIGINS = [
-    "https://twitter-clone-backend-sqlite.onrender.com",
-    "127.0.0.1",
+    "https://twitter-clone-project-1.netlify.app",
+    "http://localhost:5173"
 ]
 
 
