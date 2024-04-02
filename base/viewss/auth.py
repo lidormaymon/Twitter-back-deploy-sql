@@ -35,6 +35,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 @api_view(['POST'])
 def register(request):
+    print(request.data['image'])
     serializer = CustomUserSerializer(data=request.data)
     existUser = CustomUser.objects.filter(username = request.data['username'])
     if not existUser:
@@ -42,7 +43,7 @@ def register(request):
             email_subject = "Registration Successful"
             email_message = f"""
                 Thank you for registering to our website {request.data['username']}.
-                Please visit this link in order to activate your account https://twitter-clone-project-1.netlify.app/verify-account
+                Please visit this link in order to activate your account https://twitter-clone-project-1.netlify.app/verify-account"
                 """
             from_email = settings.DEFAULT_FROM_EMAIL  # Use your desired sender email
             try:
