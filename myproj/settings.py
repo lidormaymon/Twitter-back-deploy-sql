@@ -65,10 +65,9 @@ ALLOWED_HOSTS = [
     "127.0.0.1"
 ]
 
-CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://twitter-clone-project-1.netlify.app:10000",
+    "https://twitter-clone-project-1.netlify.app",
     "http://localhost:5173"
 ]
 
@@ -144,7 +143,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-    'django.middleware.common.CommonMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
 
