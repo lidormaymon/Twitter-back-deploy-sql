@@ -15,12 +15,12 @@ def is_follower_exists(request):
         follower_exists = Followers.follower_exists(from_user_id=from_user_id, to_user_id= to_user_id)
 
         if follower_exists:
-            like_id = Followers.objects.get(from_user_id=from_user_id, to_user_id=to_user_id).id
+            follow_id = Followers.objects.get(from_user_id=from_user_id, to_user_id=to_user_id).id
             response_data = {
                 'from_user_id': from_user_id,
                 'to_user_id': to_user_id,
                 'follower_exists': follower_exists,
-                'like_id': like_id,
+                'follow_id': follow_id,
             }
         else:
             response_data = {
