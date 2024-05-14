@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
+from django.core.exceptions import ValidationError
+
 
 # <----------------------------------------------- User Model ------------------------------------------------------->
 
@@ -59,22 +61,25 @@ class Tweets(models.Model):
     text = models.CharField(max_length=40 , null=True, blank=True)
     image = models.ImageField(null=True, blank=True, upload_to='tweets/')
 
-    # def save(self, *args, **kwargs):
-    #     # Override the save method to resize the image before saving it.
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
-    #     # Check if the profile image exists and resize it if necessary.
-    #     if self.image and hasattr(self.image, 'path'):
-    #         img_path = self.image.path
+        if self.image:
+            try:
+                with Image.open(self.image.path) as img:
+                    # Get original width and height
+                    orig_width, orig_height = img.size
 
-    #         try:
-    #             with Image.open(img_path) as img:
-    #                 # Resize the image to exactly 225x225 pixels.
-    #                 img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
-    #                 img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
-    #         except Exception as e:
-    #             # Handle the exception if any error occurs during image processing.
-    #             print(f"Error resizing image: {str(e)}")
+                    # Calculate maximum allowed dimensions while maintaining aspect ratio
+                    max_width = 1600  # Adjust for your preferred max size for in-feed images
+                    max_height = int(max_width * orig_height / orig_width)
+
+                    if img.width > max_width or img.height > max_height:
+                        img.thumbnail((max_width, max_height), Image.ANTIALIAS)
+                        img.save(self.image.path, quality=100)
+            except Exception as e:
+                print(f"Error resizing image: {str(e)}")
+                raise ValidationError("Error processing image.")
 
 # <----------------------------------------------- Tweets Like Model ---------------------------------------------->
 

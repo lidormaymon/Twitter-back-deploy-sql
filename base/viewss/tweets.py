@@ -217,7 +217,7 @@ def page_comments(request, tweet_id):
     start_index = (page - 1) * tweets_per_page
     end_index = start_index + tweets_per_page
 
-    comments = TweetComment.objects.filter(tweet_id=tweet_id).order_by('-likes', '-created_time')[start_index:end_index]
+    comments = TweetComment.objects.filter(tweet_id=tweet_id).order_by('-created_time')[start_index:end_index]
     serializer = TweetCommentSerializer(comments, many=True)
     return Response(serializer.data)
 
