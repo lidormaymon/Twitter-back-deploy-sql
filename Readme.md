@@ -1,6 +1,6 @@
 # React Twitter Back
 
-<p>This is the backend code of my Twitter clone project, to use the fronted you can find it here https://github.com/lidormaymon/Twitter-Front </p>
+<p>This is the backend code of my Twitter clone project, to use the fronted you can find it here https://github.com/lidormaymon/twitter-front-/tree/main </p>
 <p>The link for the deployed web https://twitter-clone-project-1.netlify.app/</p>
 <p>Credentials for admin user are: Username:admin Password:123</p>
 
