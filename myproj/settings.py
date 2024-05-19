@@ -67,7 +67,7 @@ ALLOWED_HOSTS = [
 
 
 CORS_ALLOWED_ORIGINS = [
-    "https://twitter-clone-project-1.netlify.app",
+    "https://litter-project.netlify.app",
     "http://localhost:5173"
 ]
 
