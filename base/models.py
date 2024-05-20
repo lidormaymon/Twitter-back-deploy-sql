@@ -13,21 +13,21 @@ class CustomUser(AbstractUser):
     email_verified = models.BooleanField(default=False) # A boolean that deceides if user has verified through email or not
     bio = models.TextField(blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        # Override the save method to resize the image before saving it.
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     # Override the save method to resize the image before saving it.
+    #     super().save(*args, **kwargs)
 
-        # Check if the profile image exists and resize it if necessary.
-        if self.profile_image and hasattr(self.profile_image, 'path'):
-            img_path = self.profile_image.path
-            try:
-                with Image.open(img_path) as img:
-                    # Resize the image to exactly 225x225 pixels.
-                    img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
-                    img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
-            except Exception as e:
-                # Handle the exception if any error occurs during image processing.
-                print(f"Error resizing image: {str(e)}")
+    #     # Check if the profile image exists and resize it if necessary.
+    #     if self.profile_image and hasattr(self.profile_image, 'path'):
+    #         img_path = self.profile_image.path
+    #         try:
+    #             with Image.open(img_path) as img:
+    #                 # Resize the image to exactly 225x225 pixels.
+    #                 img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
+    #                 img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
+    #         except Exception as e:
+    #             # Handle the exception if any error occurs during image processing.
+    #             print(f"Error resizing image: {str(e)}")
 
 # <----------------------------------------------- Followers Model ---------------------------------------------->
 
@@ -165,19 +165,19 @@ class Message(models.Model):
         con_id = self.conversation_id.id
         return f'{self.sender_id} to {recipient}: {self.text}. Conversation_id({con_id})'
     
-    def save(self, *args, **kwargs):
-        # Override the save method to resize the image before saving it.
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     # Override the save method to resize the image before saving it.
+    #     super().save(*args, **kwargs)
 
-        # Check if the profile image exists and resize it if necessary.
-        if self.image and hasattr(self.image, 'path'):
-            img_path = self.image.path
+    #     # Check if the profile image exists and resize it if necessary.
+    #     if self.image and hasattr(self.image, 'path'):
+    #         img_path = self.image.path
 
-            try:
-                with Image.open(img_path) as img:
-                    # Resize the image to exactly 225x225 pixels.
-                    img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
-                    img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
-            except Exception as e:
-                # Handle the exception if any error occurs during image processing.
-                print(f"Error resizing image: {str(e)}")
+    #         try:
+    #             with Image.open(img_path) as img:
+    #                 # Resize the image to exactly 225x225 pixels.
+    #                 img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
+    #                 img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
+    #         except Exception as e:
+    #             # Handle the exception if any error occurs during image processing.
+    #             print(f"Error resizing image: {str(e)}")
