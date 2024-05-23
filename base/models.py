@@ -6,28 +6,28 @@ from django.core.exceptions import ValidationError
 
 # <----------------------------------------------- User Model ------------------------------------------------------->
 
-class CustomUser(AbstractUser):
+class   CustomUser(AbstractUser):
     is_verified = models.BooleanField(default=False)
     display_name = models.CharField(max_length=20, null=False, blank=False)
     profile_image = models.ImageField(null=True, blank=True, default='defaultProfile.jpg', upload_to='profiles/')
     email_verified = models.BooleanField(default=False) # A boolean that deceides if user has verified through email or not
     bio = models.TextField(blank=True, null=True)
 
-    # def save(self, *args, **kwargs):
-    #     # Override the save method to resize the image before saving it.
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        # Override the save method to resize the image before saving it.
+        super().save(*args, **kwargs)
 
-    #     # Check if the profile image exists and resize it if necessary.
-    #     if self.profile_image and hasattr(self.profile_image, 'path'):
-    #         img_path = self.profile_image.path
-    #         try:
-    #             with Image.open(img_path) as img:
-    #                 # Resize the image to exactly 225x225 pixels.
-    #                 img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
-    #                 img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
-    #         except Exception as e:
-    #             # Handle the exception if any error occurs during image processing.
-    #             print(f"Error resizing image: {str(e)}")
+        # Check if the profile image exists and resize it if necessary.
+        if self.profile_image and hasattr(self.profile_image, 'path'):
+            img_path = self.profile_image.path
+            try:
+                with Image.open(img_path) as img:
+                    # Resize the image to exactly 225x225 pixels.
+                    img = img.resize((225, 225), Image.ANTIALIAS)  # Use Image.ANTIALIAS for better quality resizing.
+                    img.save(img_path, quality=100)  # Set quality to 100 for maximum quality.
+            except Exception as e:
+                # Handle the exception if any error occurs during image processing.
+                print(f"Error resizing image: {str(e)}")
 
 # <----------------------------------------------- Followers Model ---------------------------------------------->
 
@@ -67,7 +67,7 @@ class Tweets(models.Model):
         if self.image:
             try:
                 with Image.open(self.image.path) as img:
-                    # Get original width and height
+                    # Get original width and height qq
                     orig_width, orig_height = img.size
 
                     # Calculate maximum allowed dimensions while maintaining aspect ratio

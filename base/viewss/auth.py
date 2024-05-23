@@ -43,7 +43,7 @@ def register(request):
             email_subject = "Registration Successful"
             email_message = f"""
                 Thank you for registering to our website {request.data['username']}.
-                Please visit this link in order to activate your account https://twitter-clone-project-1.netlify.app/verify-account"
+                Please visit this link in order to activate your account https://litter-project.netlify.app/verify-account"
                 """
             from_email = settings.DEFAULT_FROM_EMAIL  # Use your desired sender email
             try:
@@ -129,17 +129,17 @@ class UserViewSet(APIView):
 
 @api_view(['GET'])
 def search_users(request):
-    if request.method == 'GET':
-        query = request.GET.get('query', '')  # Get the search query from the request
+    query = request.GET.get('query', '').lower() # Get the search query from the request
 
-        if not query:
-            return ' '
-        # Perform a case-insensitive search for usernames
-        matching_users = CustomUser.objects.filter(username__icontains=query)
-        matching_users = [user for user in matching_users if user.username.lower() != 'admin']
+
+    if not query:
+        return ' '
+    # Perform a case-insensitive search for usernames
+    matching_users = CustomUser.objects.filter(username__icontains=query)
+    matching_users = [user for user in matching_users if user.username.lower() != 'admin']
 
         
 
-        usernames = [user.id for user in matching_users if user.username.startswith(query)]
-        return Response({'usernames': usernames})
+    usernames = [user.id for user in matching_users if user.username.startswith(query)]
+    return Response({'usernames': usernames})
     
