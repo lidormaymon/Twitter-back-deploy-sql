@@ -58,7 +58,7 @@ def register(request):
             else:
                 image = request.data['image']
 
-            user = CustomUser.objects.create_user(
+            CustomUser.objects.create_user(
                 username=request.data['username'],
                 email=request.data['email'],
                 password=request.data['password'],
@@ -129,17 +129,15 @@ class UserViewSet(APIView):
 
 @api_view(['GET'])
 def search_users(request):
-    query = request.GET.get('query', '').lower() # Get the search query from the request
-
+    query = request.GET.get('query', '').lower()  # Get the search query from the request
 
     if not query:
-        return ' '
-    # Perform a case-insensitive search for usernames
-    matching_users = CustomUser.objects.filter(username__icontains=query)
-    matching_users = [user for user in matching_users if user.username.lower() != 'admin']
+        return ''  # Return an empty list if no query is provided
 
-        
+    # Perform a case-insensitive search for usernames and exclude 'admin'
+    matching_users = CustomUser.objects.filter(username__icontains=query).exclude(username__iexact='admin')
 
-    usernames = [user.id for user in matching_users if user.username.startswith(query)]
+    # Get the user IDs of the matching users
+    usernames = [user.id for user in matching_users]
+
     return Response({'usernames': usernames})
-    
